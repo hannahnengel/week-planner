@@ -1,7 +1,7 @@
+/* global data */
+/* exported data */
 
 var $entryForm = document.querySelector('.entry-form');
-
-var data = [];
 
 $entryForm.addEventListener('submit', function (event) {
   event.preventDefault();

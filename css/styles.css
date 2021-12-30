@@ -1,20 +1,3 @@
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.column-full {
-  width: 100%;
-}
-
 * {
   font-family: "Balsamiq Sans", sans-serif;
   background-color: whitesmoke;
@@ -92,8 +75,4 @@ textarea:focus::placeholder {
   transform: translate(-50%, -50%);
   padding: 0 2rem;
   z-index: 2;
-}
-
-.hidden {
-  display: none;
 }
