@@ -1,5 +1,6 @@
 .container {
-  max-width: 900px;
+  max-width: 1000px;
+  min-width: 845px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -8,13 +9,21 @@
   display: flex;
   flex-wrap: wrap;
   text-align: center;
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 
 .column-full {
   width: 100%;
 }
 
+.column-seventh {
+  width: calc(100% / 7);
+}
+
 .hidden {
   display: none;
+}
+
+.invisible {
+  visibility: hidden;
 }

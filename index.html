@@ -11,19 +11,42 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="grey-overlay"></div>
+  <div class="grey-overlay hidden"></div>
   <div class="container">
     <div class="row">
       <div class="column-full">
         <h1>Weekly Planner</h1>
       </div>
     </div>
-    <div class="row">
-      <div class="column-full">
-        <button class="rectangle">Add Entry</button>
+    <div class="row week-buttons invisible">
+      <div class="column-seventh">
+        <button class="square-button">Sunday</button>
+      </div>
+      <div class="column-seventh">
+        <button class="square-button">Monday</button>
+      </div>
+      <div class="column-seventh">
+        <button class="square-button">Tuesday</button>
+      </div>
+      <div class="column-seventh">
+        <button class="square-button">Wednesday</button>
+      </div>
+      <div class="column-seventh">
+        <button class="square-button">Thursday</button>
+      </div>
+      <div class="column-seventh">
+        <button class="square-button">Friday</button>
+      </div>
+      <div class="column-seventh">
+        <button class="square-button">Saturday</button>
       </div>
     </div>
-    <div class="modal">
+    <div class="row">
+      <div class="column-full">
+        <button class="rectangle add-entry-button">Add Entry</button>
+      </div>
+    </div>
+    <div class="modal hidden">
       <div class="row">
         <div class="column-full">
           <h1>Add Entry</h1>

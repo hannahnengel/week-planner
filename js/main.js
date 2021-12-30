@@ -2,6 +2,9 @@
 /* exported data */
 
 var $entryForm = document.querySelector('.entry-form');
+var $modal = document.querySelector('.modal');
+var $greyOverlay = document.querySelector('.grey-overlay');
+var $addEntryButton = document.querySelector('.add-entry-button');
 
 $entryForm.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -12,4 +15,19 @@ $entryForm.addEventListener('submit', function (event) {
   };
   data.push(objectOfValues);
   $entryForm.reset();
+  hideModal();
 });
+
+$addEntryButton.addEventListener('click', function (event) {
+  openModal();
+});
+
+function hideModal() {
+  $modal.classList.add('hidden');
+  $greyOverlay.classList.add('hidden');
+}
+
+function openModal() {
+  $modal.classList.remove('hidden');
+  $greyOverlay.classList.remove('hidden');
+}
