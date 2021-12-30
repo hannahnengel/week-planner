@@ -1,0 +1,99 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.column-full {
+  width: 100%;
+}
+
+* {
+  font-family: "Balsamiq Sans", sans-serif;
+  background-color: whitesmoke;
+}
+
+h1 {
+  font-weight: normal;
+  margin: 0;
+}
+
+button.rectangle {
+  box-shadow: 2px 2px black;
+  border: 2px solid black;
+  padding: 0.5rem 3rem;
+}
+
+button.shorter-button {
+  box-shadow: 2px 2px black;
+  border: 2px solid black;
+  padding: 0.2rem 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgba(149, 188, 242, 255);
+}
+
+.text-align-start {
+  text-align: start;
+}
+
+.text-align-end {
+  text-align: end;
+}
+
+select {
+  padding: 0.2rem;
+  width: 110px;
+  border: 2px solid black;
+  margin: 0 1rem 1rem 0;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 2px solid black;
+}
+
+::placeholder {
+  color: black;
+}
+
+textarea:focus::placeholder {
+  color: transparent;
+}
+
+.grey-overlay {
+  background-color: black;
+  opacity: 0.75;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.modal {
+  width: 600px;
+  height: 375px;
+  background-color: whitesmoke;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 2rem;
+  z-index: 2;
+}
+
+.hidden {
+  display: none;
+}
