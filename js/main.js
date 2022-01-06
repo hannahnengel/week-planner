@@ -31,3 +31,16 @@ function openModal() {
   $modal.classList.remove('hidden');
   $greyOverlay.classList.remove('hidden');
 }
+
+// function renderEntries(entry) {
+
+var tr = document.createElement('tr');
+var tdTime = document.createElement('td');
+
+var tdDescription = document.createElement('td');
+
+tr.appendChild(tdTime);
+tr.appendChild(tdDescription);
+
+//   return tr;
+// }
