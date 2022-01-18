@@ -111,7 +111,7 @@ th {
   background-color: #ccc;
 }
 
-tr:nth-child(odd) {
+.odd {
   background-color: #eee;
 }
 

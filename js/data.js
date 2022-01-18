@@ -1,4 +1,9 @@
-var data = [];
+var data = {
+  entries: [],
+  editing: null,
+  nextEntryID: 1,
+  view: 'Monday'
+};
 
 var previousDataJSON = localStorage.getItem('javascript-local-storage');
 if (previousDataJSON !== null) {
