@@ -139,8 +139,18 @@ function make8TableLines() {
       tdTime.setAttribute('data-view', dayofWeek);
       var tdDescription = document.createElement('td');
       tdDescription.setAttribute('data-view', dayofWeek);
+
+      var tdButtons = document.createElement('td');
+      tdButtons.setAttribute('data-view', dayofWeek);
+      tdButtons.setAttribute('class', 'text-align-end');
+      var updateButton = document.createElement('button');
+      updateButton.setAttribute('class', 'invisible rectangle update-button');
+      updateButton.textContent = 'Update';
+      tdButtons.appendChild(updateButton);
+
       tr.appendChild(tdTime);
       tr.appendChild(tdDescription);
+      tr.appendChild(tdButtons);
 
       $tbody.appendChild(tr);
     }
@@ -239,19 +249,29 @@ function renderEntries(entry) {
   var tdDescription = document.createElement('td');
   tdDescription.setAttribute('data-view', entry.day);
 
+  var tdButtons = document.createElement('td');
+  tdButtons.setAttribute('data-view', entry.day);
+  var updateButton = document.createElement('button');
+  updateButton.setAttribute('class', 'rectangle update-button');
+  updateButton.textContent = 'Update';
+  tdButtons.appendChild(updateButton);
+
   if (entry.day !== 'Monday') {
     tr.setAttribute('class', 'hidden');
     tdTime.setAttribute('class', 'hidden');
     tdDescription.setAttribute('class', 'hidden');
+    tdButtons.setAttribute('class', 'hidden text-align-end');
   } else {
     tr.setAttribute('class', 'active');
     tdTime.setAttribute('class', 'active');
     tdDescription.setAttribute('class', 'active');
+    tdButtons.setAttribute('class', 'active text-align-end');
   }
 
   tdDescription.textContent = entry.description;
   tr.appendChild(tdTime);
   tr.appendChild(tdDescription);
+  tr.appendChild(tdButtons);
 
   return tr;
 }

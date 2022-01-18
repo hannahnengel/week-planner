@@ -33,9 +33,22 @@ button.square-button:hover {
   background-color: #ddd;
 }
 
+button.update-button {
+  margin: 1px 5px;
+  background-color: rgba(43, 120, 228, 255);
+  color: white;
+}
+
+button.delete-button {
+  margin: 1px 32px 1px 1px;
+  background-color: rgba(204, 0, 0, 255);
+  color: white;
+}
+
 button:hover {
   cursor: pointer;
   background-color: rgba(149, 188, 242, 255);
+  color: black;
 }
 
 .text-align-start {
@@ -115,7 +128,7 @@ th {
   background-color: #eee;
 }
 
-th:nth-child(odd),
-td:nth-child(odd) {
+th:nth-child(odd):not(:last-child),
+td:nth-child(odd):not(:last-child) {
   border-right: 2px solid black;
 }
