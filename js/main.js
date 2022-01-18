@@ -215,12 +215,12 @@ function changeView() {
   var $trsActive = document.querySelectorAll('tbody > tr.active');
   if ($trsActive.length > 0) {
     for (var k = 0; k < $trsActive.length; k++) {
-      if ($trs[k].className === 'active' && $trs[k].getAttribute('data-view') === data.view) {
+      if ($trsActive[k].getAttribute('data-view') === data.view) {
         $p.textContent = '';
         $table.classList.remove('hidden');
       }
     }
-  } else {
+  } else if ($trsActive.length === 0) {
     $p.textContent = 'No events scheduled for' + ' ' + data.view;
     $table.classList.add('hidden');
   }
@@ -269,7 +269,11 @@ function renderEntries(entry) {
   var updateButton = document.createElement('button');
   updateButton.setAttribute('class', 'rectangle update-button');
   updateButton.textContent = 'Update';
+  var deleteButton = document.createElement('button');
+  deleteButton.setAttribute('class', 'rectangle delete-button');
+  deleteButton.textContent = 'Delete';
   tdButtons.appendChild(updateButton);
+  tdButtons.appendChild(deleteButton);
 
   if (entry.day !== 'Monday') {
     tr.setAttribute('class', 'hidden');
@@ -338,5 +342,47 @@ function editAnEntry(event) {
       }
     }
 
+  } else if (event.target.className === 'rectangle delete-button') {
+    openModal();
+    $h1 = document.querySelector('div.modal > div.row > div.column-full > h1');
+    $h1.textContent = 'Delete Entry';
+    $entryForm.classList.add('hidden');
+    var $h2 = $modal.querySelector('h2');
+    if ($h2 === null) {
+      var divRow1 = document.createElement('div');
+      divRow1.setAttribute('class', 'row');
+      var divColumnFull1 = document.createElement('div');
+      divColumnFull1.setAttribute('class', 'column-full');
+      var h2 = document.createElement('h2');
+      h2.textContent = 'Are you sure you want to delete this entry?';
+      divColumnFull1.appendChild(h2);
+      divRow1.appendChild(divColumnFull1);
+
+      var divRow2 = document.createElement('div');
+      divRow2.setAttribute('class', 'row');
+      var divColumnFull2 = document.createElement('div');
+      divColumnFull2.setAttribute('class', 'column-full');
+      var yesButton = document.createElement('button');
+      yesButton.setAttribute('class', 'rectangle yes-button');
+      yesButton.textContent = 'Yes';
+      var noButton = document.createElement('button');
+      noButton.setAttribute('class', 'rectangle no-button');
+      noButton.textContent = 'No';
+      divColumnFull2.appendChild(yesButton);
+      divColumnFull2.appendChild(noButton);
+      divRow2.appendChild(divColumnFull2);
+
+      $modal.appendChild(divRow1);
+      $modal.appendChild(divRow2);
+    }
+  }
+}
+
+$modal.addEventListener('click', deleteAnEntry);
+function deleteAnEntry(event) {
+  if (event.target.className === 'rectangle no-button') {
+    hideModal();
+  } else if (event.target.className === 'rectangle yes-button') {
+    // insert code to delete here //
   }
 }
