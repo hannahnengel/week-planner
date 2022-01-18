@@ -20,9 +20,23 @@ $entryForm.addEventListener('submit', function (event) {
     description: $entryForm.elements.description.value
   };
 
-  objectOfValues.itemEntryID = data.nextEntryID;
-  data.nextEntryID++;
-  objectOfValues.nextEntryID = data.nextEntryID;
+  if (data.editing !== null) {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].itemEntryID === data.editing.itemEntryID) {
+        objectOfValues.itemEntryID = data.entries[i].itemEntryID;
+        objectOfValues.nextEntryID = data.entries[i].nextEntryID;
+        var itemEntryID = data.editing.itemEntryID;
+        data.entries.splice(i, 1);
+        var $oldData = document.querySelector('[data-entry-id =' + CSS.escape(itemEntryID) + ']');
+        $tbody.removeChild($oldData);
+        data.editing = null;
+      }
+    }
+  } else {
+    objectOfValues.itemEntryID = data.nextEntryID;
+    data.nextEntryID++;
+    objectOfValues.nextEntryID = data.nextEntryID;
+  }
   data.view = 'Monday';
 
   data.entries.push(objectOfValues);
@@ -243,6 +257,7 @@ function addAnEntry(entry) {
 function renderEntries(entry) {
   var tr = document.createElement('tr');
   tr.setAttribute('data-view', entry.day);
+  tr.setAttribute('data-entry-id', entry.itemEntryID);
   var tdTime = document.createElement('td');
   tdTime.setAttribute('data-view', entry.day);
   tdTime.textContent = entry.time;
