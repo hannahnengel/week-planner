@@ -1,6 +1,5 @@
 * {
   font-family: "Balsamiq Sans", sans-serif;
-  background-color: whitesmoke;
 }
 
 h1 {
@@ -10,6 +9,7 @@ h1 {
 
 button {
   border: 2px solid black;
+  background-color: white;
 }
 
 button.rectangle {
@@ -26,6 +26,11 @@ button.square-button {
   width: 70%;
   height: 80px;
   box-sizing: border-box;
+  background-color: white;
+}
+
+button.square-button:hover {
+  background-color: #ddd;
 }
 
 button:hover {
@@ -76,11 +81,41 @@ textarea:focus::placeholder {
 .modal {
   width: 600px;
   height: 375px;
-  background-color: whitesmoke;
   position: fixed;
+  background-color: white;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0 2rem;
   z-index: 2;
+}
+
+.table {
+  width: 100%;
+  border: 3px solid black;
+  border-spacing: 0;
+}
+
+td {
+  padding: 3px;
+  text-align: start;
+}
+
+tr {
+  height: 2rem;
+}
+
+th {
+  padding: 3px;
+  text-align: left;
+  background-color: #ccc;
+}
+
+.odd {
+  background-color: #eee;
+}
+
+th:nth-child(odd),
+td:nth-child(odd) {
+  border-right: 2px solid black;
 }

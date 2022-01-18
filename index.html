@@ -20,25 +20,25 @@
     </div>
     <div class="row week-buttons invisible">
       <div class="column-seventh">
-        <button class="square-button">Sunday</button>
+        <button class="square-button" data-view="Sunday">Sunday</button>
       </div>
       <div class="column-seventh">
-        <button class="square-button">Monday</button>
+        <button class="square-button" data-view="Monday">Monday</button>
       </div>
       <div class="column-seventh">
-        <button class="square-button">Tuesday</button>
+        <button class="square-button" data-view="Tuesday">Tuesday</button>
       </div>
       <div class="column-seventh">
-        <button class="square-button">Wednesday</button>
+        <button class="square-button" data-view="Wednesday">Wednesday</button>
       </div>
       <div class="column-seventh">
-        <button class="square-button">Thursday</button>
+        <button class="square-button" data-view="Thursday">Thursday</button>
       </div>
       <div class="column-seventh">
-        <button class="square-button">Friday</button>
+        <button class="square-button" data-view="Friday">Friday</button>
       </div>
       <div class="column-seventh">
-        <button class="square-button">Saturday</button>
+        <button class="square-button" data-view="Saturday">Saturday</button>
       </div>
     </div>
     <div class="row">
@@ -93,7 +93,6 @@
               <option value="21:00">21:00</option>
               <option value="22:00">22:00</option>
               <option value="23:00">23:00</option>
-              <option value="24:00">24:00</option>
             </select>
           </div>
         </div>
@@ -109,6 +108,22 @@
           </div>
         </div>
       </form>
+    </div>
+    <div class="row scheduled-events-row hidden">
+      <div class="column-full scheduled-events-column">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Time</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+        <p> </p>
+      </div>
     </div>
   </div>
   <script src="js/main.js"></script>
