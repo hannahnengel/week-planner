@@ -295,3 +295,33 @@ function buttonClickViewSwap(event) {
   make8TableLines();
   styleVisibleCells();
 }
+
+$table.addEventListener('click', editAnEntry);
+function editAnEntry(event) {
+  if (event.target.className === 'rectangle update-button') {
+    openModal();
+    var $h1 = document.querySelector('div.modal > div.row > div.column-full > h1');
+    $h1.textContent = 'Update Entry';
+
+    var dayOfWeek = event.target.closest('tr').getAttribute('data-view');
+    var tdTime = event.target.closest('tr').childNodes[0].innerHTML;
+    var tdDescription = event.target.closest('tr').childNodes[1].innerHTML;
+
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].day === dayOfWeek && data.entries[i].time === tdTime && data.entries[i].description === tdDescription) {
+        data.editing = data.entries[i];
+      }
+    }
+
+    var $formDescription = $entryForm.querySelector('textarea');
+    $formDescription.textContent = tdDescription;
+
+    var $formOptions = $entryForm.querySelectorAll('option');
+    for (var j = 0; j < $formOptions.length; j++) {
+      if ($formOptions[j].innerHTML === dayOfWeek || $formOptions[j].innerHTML === tdTime) {
+        $formOptions[j].setAttribute('selected', 'selected');
+      }
+    }
+
+  }
+}
