@@ -20,9 +20,23 @@ $entryForm.addEventListener('submit', function (event) {
     description: $entryForm.elements.description.value
   };
 
-  objectOfValues.itemEntryID = data.nextEntryID;
-  data.nextEntryID++;
-  objectOfValues.nextEntryID = data.nextEntryID;
+  if (data.editing !== null) {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].itemEntryID === data.editing.itemEntryID) {
+        objectOfValues.itemEntryID = data.entries[i].itemEntryID;
+        objectOfValues.nextEntryID = data.entries[i].nextEntryID;
+        var itemEntryID = data.editing.itemEntryID;
+        data.entries.splice(i, 1);
+        var $oldData = document.querySelector('[data-entry-id =' + CSS.escape(itemEntryID) + ']');
+        $tbody.removeChild($oldData);
+        data.editing = null;
+      }
+    }
+  } else {
+    objectOfValues.itemEntryID = data.nextEntryID;
+    data.nextEntryID++;
+    objectOfValues.nextEntryID = data.nextEntryID;
+  }
   data.view = 'Monday';
 
   data.entries.push(objectOfValues);
@@ -139,8 +153,18 @@ function make8TableLines() {
       tdTime.setAttribute('data-view', dayofWeek);
       var tdDescription = document.createElement('td');
       tdDescription.setAttribute('data-view', dayofWeek);
+
+      var tdButtons = document.createElement('td');
+      tdButtons.setAttribute('data-view', dayofWeek);
+      tdButtons.setAttribute('class', 'text-align-end');
+      var updateButton = document.createElement('button');
+      updateButton.setAttribute('class', 'invisible rectangle update-button');
+      updateButton.textContent = 'Update';
+      tdButtons.appendChild(updateButton);
+
       tr.appendChild(tdTime);
       tr.appendChild(tdDescription);
+      tr.appendChild(tdButtons);
 
       $tbody.appendChild(tr);
     }
@@ -233,25 +257,36 @@ function addAnEntry(entry) {
 function renderEntries(entry) {
   var tr = document.createElement('tr');
   tr.setAttribute('data-view', entry.day);
+  tr.setAttribute('data-entry-id', entry.itemEntryID);
   var tdTime = document.createElement('td');
   tdTime.setAttribute('data-view', entry.day);
   tdTime.textContent = entry.time;
   var tdDescription = document.createElement('td');
   tdDescription.setAttribute('data-view', entry.day);
 
+  var tdButtons = document.createElement('td');
+  tdButtons.setAttribute('data-view', entry.day);
+  var updateButton = document.createElement('button');
+  updateButton.setAttribute('class', 'rectangle update-button');
+  updateButton.textContent = 'Update';
+  tdButtons.appendChild(updateButton);
+
   if (entry.day !== 'Monday') {
     tr.setAttribute('class', 'hidden');
     tdTime.setAttribute('class', 'hidden');
     tdDescription.setAttribute('class', 'hidden');
+    tdButtons.setAttribute('class', 'hidden text-align-end');
   } else {
     tr.setAttribute('class', 'active');
     tdTime.setAttribute('class', 'active');
     tdDescription.setAttribute('class', 'active');
+    tdButtons.setAttribute('class', 'active text-align-end');
   }
 
   tdDescription.textContent = entry.description;
   tr.appendChild(tdTime);
   tr.appendChild(tdDescription);
+  tr.appendChild(tdButtons);
 
   return tr;
 }
@@ -274,4 +309,34 @@ function buttonClickViewSwap(event) {
   changeView();
   make8TableLines();
   styleVisibleCells();
+}
+
+$table.addEventListener('click', editAnEntry);
+function editAnEntry(event) {
+  if (event.target.className === 'rectangle update-button') {
+    openModal();
+    var $h1 = document.querySelector('div.modal > div.row > div.column-full > h1');
+    $h1.textContent = 'Update Entry';
+
+    var dayOfWeek = event.target.closest('tr').getAttribute('data-view');
+    var tdTime = event.target.closest('tr').childNodes[0].innerHTML;
+    var tdDescription = event.target.closest('tr').childNodes[1].innerHTML;
+
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].day === dayOfWeek && data.entries[i].time === tdTime && data.entries[i].description === tdDescription) {
+        data.editing = data.entries[i];
+      }
+    }
+
+    var $formDescription = $entryForm.querySelector('textarea');
+    $formDescription.textContent = tdDescription;
+
+    var $formOptions = $entryForm.querySelectorAll('option');
+    for (var j = 0; j < $formOptions.length; j++) {
+      if ($formOptions[j].innerHTML === dayOfWeek || $formOptions[j].innerHTML === tdTime) {
+        $formOptions[j].setAttribute('selected', 'selected');
+      }
+    }
+
+  }
 }
