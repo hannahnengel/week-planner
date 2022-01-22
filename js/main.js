@@ -74,6 +74,7 @@ $entryForm.addEventListener('submit', function (event) {
 });
 
 $addEntryButton.addEventListener('click', function (event) {
+  resetModal();
   openModal();
 });
 
@@ -192,7 +193,7 @@ function styleVisibleCells() {
 function changeView() {
   var $trs = document.querySelectorAll('tbody > tr');
   var $tds = document.querySelectorAll('td');
-  var $h2 = document.querySelector('h2');
+  var $h2 = document.querySelector('div.scheduled-events-column > h2');
   if ($h2 !== null) { $h2.textContent = 'Scheduled Events for' + ' ' + data.view; }
   if ($trs.length > 0) {
     for (var i = 0; i < $trs.length; i++) {
@@ -331,6 +332,7 @@ function editAnEntry(event) {
     }
   }
   if (event.target.className === 'rectangle update-button') {
+    resetModal();
     openModal();
     var $h1 = document.querySelector('div.modal > div.row > div.column-full > h1');
     $h1.textContent = 'Update Entry';
@@ -346,6 +348,7 @@ function editAnEntry(event) {
     }
 
   } else if (event.target.className === 'rectangle delete-button') {
+    resetModal();
     openModal();
     $h1 = document.querySelector('div.modal > div.row > div.column-full > h1');
     $h1.textContent = 'Delete Entry';
@@ -410,12 +413,11 @@ function deleteAnEntry(event) {
     changeView();
     styleVisibleCells();
   }
-  resetModal();
 }
 
 function resetModal() {
-  var $h1 = document.querySelector('div.modal > div.row > div.column-full > h1');
-  $h1.textContent = 'Add Entry';
+  var $h1Modal = document.querySelector('div.modal > div.row > div.column-full > h1');
+  $h1Modal.textContent = 'Add Entry';
   $entryForm.classList.remove('hidden');
 
   var $deleteModal = document.querySelector('.delete-modal');
