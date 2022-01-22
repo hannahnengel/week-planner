@@ -45,6 +45,12 @@ button.delete-button {
   color: white;
 }
 
+button.yes-button,
+button.no-button {
+  padding: 0.5rem 1rem;
+  margin: 2rem;
+}
+
 button:hover {
   cursor: pointer;
   background-color: rgba(149, 188, 242, 255);
