@@ -27,6 +27,7 @@ button.square-button {
   height: 80px;
   box-sizing: border-box;
   background-color: white;
+  padding: 1.7rem 0.5rem;
 }
 
 button.square-button:hover {
@@ -137,4 +138,9 @@ th {
 th:nth-child(odd):not(:last-child),
 td:nth-child(odd):not(:last-child) {
   border-right: 2px solid black;
+}
+
+span {
+  align-items: flex-end;
+  justify-content: flex-end;
 }
