@@ -30,6 +30,7 @@ $entryForm.addEventListener('submit', function (event) {
         var $oldData = document.querySelector('[data-entry-id =' + CSS.escape(itemEntryID) + ']');
         $tbody.removeChild($oldData);
         data.editing = null;
+        resetModal();
       }
     }
   } else {
@@ -47,6 +48,7 @@ $entryForm.addEventListener('submit', function (event) {
   var $trsActive = document.querySelectorAll('tbody > tr.active');
 
   if ($trsActive.length > 0) {
+    $tbody.prepend(newEntry);
     var insertBeforeIndex = findInsertBeforeIndex(newEntry);
     $tbody.insertBefore(newEntry, $tbody.childNodes[insertBeforeIndex]);
   } else if ($trsActive.length === 0) {
@@ -71,6 +73,7 @@ $entryForm.addEventListener('submit', function (event) {
   changeView();
   make8TableLines();
   styleVisibleCells();
+  showNumberOfEntries();
 });
 
 $addEntryButton.addEventListener('click', function (event) {
@@ -255,6 +258,7 @@ function addAnEntry(entry) {
   changeView();
   make8TableLines();
   styleVisibleCells();
+  showNumberOfEntries();
 }
 
 function renderEntries(entry) {
@@ -316,6 +320,7 @@ function buttonClickViewSwap(event) {
   changeView();
   make8TableLines();
   styleVisibleCells();
+  showNumberOfEntries();
 }
 
 var trEditing;
@@ -361,6 +366,8 @@ function editAnEntry(event) {
     $deleteModal.classList.remove('hidden');
   }
   changeView();
+  styleVisibleCells();
+
 }
 
 function createDeleteModal() {
@@ -412,16 +419,55 @@ function deleteAnEntry(event) {
     make8TableLines();
     changeView();
     styleVisibleCells();
+    showNumberOfEntries();
   }
 }
 
 function resetModal() {
+  $entryForm.reset();
   var $h1Modal = document.querySelector('div.modal > div.row > div.column-full > h1');
   $h1Modal.textContent = 'Add Entry';
   $entryForm.classList.remove('hidden');
 
+  var $formOptions = document.querySelectorAll('option');
+  for (var i = 0; i < $formOptions.length; i++) {
+    $formOptions[i].removeAttribute('selected');
+  }
+
+  var $textArea = document.querySelector('textarea');
+  $textArea.textContent = '';
+
   var $deleteModal = document.querySelector('.delete-modal');
   if ($deleteModal !== null) {
     $deleteModal.classList.add('hidden');
+  }
+}
+
+function showNumberOfEntries() {
+  var $weekButtonList = document.querySelectorAll('button.square-button');
+  var $spanList = document.querySelectorAll('span');
+
+  for (var o = 0; o < $spanList.length; o++) {
+
+    if ($weekButtonList[o].getAttribute('data-view') === $spanList[o].getAttribute('data-view')) {
+      var numberOfEntries = 0;
+      var dayOfWeek = $spanList[o].getAttribute('data-view');
+
+      var $trs = document.querySelectorAll('tbody > tr[data-view="' + dayOfWeek + '"]');
+
+      var $tds = document.querySelectorAll('tbody > tr > td[data-view="' + dayOfWeek + '"]');
+      var doubled = 0;
+      var rowsToDelete = 0;
+      if ($tds.length > 0) {
+        for (var p = 0; p < $tds.length; p++) {
+          if ($tds[p].innerHTML === '') {
+            doubled += 1;
+            rowsToDelete = (doubled / 2);
+          }
+        }
+      } else rowsToDelete = 0;
+      numberOfEntries = $trs.length - rowsToDelete;
+      $spanList[o].innerHTML = numberOfEntries;
+    }
   }
 }
